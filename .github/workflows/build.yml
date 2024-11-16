@@ -16,7 +16,7 @@ jobs:
 
     - name: Configure
       run: |
-        ls /Applications/Developer/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/
+        ls /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/
         mkdir build && cd build
         cmake -G Xcode ..
 
