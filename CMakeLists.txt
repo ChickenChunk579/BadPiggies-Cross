@@ -211,6 +211,11 @@ target_link_libraries ( ${PROJECT_NAME}
                         ${EXT_DEPS}
                       )
 
+target_include_directories(
+  ${PROJECT_NAME}
+  ${EXT_HEADERS}
+)
+
 if( NOM_BUILD_IOS )
   SET_TARGET_PROPERTIES (
                           ${PROJECT_NAME}
