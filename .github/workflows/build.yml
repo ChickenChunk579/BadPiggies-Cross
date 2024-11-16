@@ -1,0 +1,40 @@
+name: Build Game
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up CMake
+      uses: jwlawson/actions-setup-cmake@v2
+
+    - name: Configure
+      run: |
+        mkdir build && cd build
+        cmake -G Xcode ..
+
+    - name: Build
+      run: |
+        cd build
+        ls
+        xcodebuild -scheme BadPiggies -configuration Release -destination platform=iOS -archivePath ./BadPiggies.xcarchive CODE_SIGNING_ALLOWED=NO
+
+    - name: Create IPA
+      run: |
+        mkdir Payload
+        mv build/Release/BadPiggies.app Payload/BadPiggies.app
+
+        zip -r "BadPiggies.ipa" "Payload"
+
+        mv BadPiggies.ipa ${{ runner.temp }}/BadPiggies.ipa
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: BadPiggies-iOS
+        path: ${{ runner.temp }}/BadPiggies.ipa

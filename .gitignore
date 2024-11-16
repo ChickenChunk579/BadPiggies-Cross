@@ -1,5 +1,5 @@
 # CMake build dirs
-build*
+build/
 
 # Auto-generated files from CMake
 src/platforms.hpp
