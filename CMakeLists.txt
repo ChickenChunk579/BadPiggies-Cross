@@ -35,7 +35,7 @@ if( CMAKE_SYSTEM_NAME STREQUAL "Darwin" )
     # Allow simulator and deploy.
     SET( CMAKE_XCODE_EFFECTIVE_PLATFORMS "-iphoneos;-iphonesimulator" )
 
-    set( SDKVER "7.1" )
+    set( SDKVER "18.0.1" )
     set( DEVROOT "/Applications/Developer/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer" )
     set( SDKROOT "${DEVROOT}/SDKs/iPhoneOS${SDKVER}.sdk" )
 
