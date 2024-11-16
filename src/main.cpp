@@ -65,6 +65,7 @@ static std::string bmp_file;
 const std::string resource_path( const std::string& identifier )
 {
   #if defined(__APPLE__)
+  char resources_path [ PATH_MAX ]; // file-system path
   CFBundleRef bundle; // bundle type reference
 
   // Look for a bundle using its identifier if string passed is not null
