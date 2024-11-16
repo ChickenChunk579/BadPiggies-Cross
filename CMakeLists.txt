@@ -123,9 +123,6 @@ if( NOM_BUILD_IOS )
 
   set ( EXT_DEPS
         ${EXT_DEPS}
-        "${PROJECT_SOURCE_DIR}/libs/SDL/Debug-iphoneos/libSDL2.a"
-        "${PROJECT_SOURCE_DIR}/libs/SDL/Debug-iphoneos/libSDL2_image.a"
-        "${PROJECT_SOURCE_DIR}/libs/SDL/Debug-iphoneos/libSDL2_ttf.a"
       )
 
   set ( EXT_HEADERS
@@ -171,6 +168,15 @@ if( NOM_BUILD_IOS OR NOM_PLATFORM_OSX )
   foreach(FW ${FRAMEWORKS})
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
   endforeach()
+  add_subdirectory(SDL)
+  add_subdirectory(SDL_image)
+  add_subdirectory(SDL_ttf)
+  set (EXT_DEPS
+    ${EXT_DEPS}
+    SDL2::SDL2
+    SDL2_image::SDL2_image
+    SDL2_ttf::SDL2_ttf
+  )
 endif( NOM_BUILD_IOS OR NOM_PLATFORM_OSX )
 
 SET_SOURCE_FILES_PROPERTIES (
