@@ -24,7 +24,7 @@ jobs:
       run: |
         cd build
         ls
-        xcodebuild -scheme BadPiggies -configuration Release -destination 'platform=iOS, id=dvtdevice-DVTiPhonePlaceholder-iphoneos:placeholder, name=Any iOS Device' -archivePath ./BadPiggies.xcarchive CODE_SIGNING_ALLOWED=NO
+        xcodebuild -scheme BadPiggies -configuration Release -destination platform=iOS -archivePath ./BadPiggies.xcarchive CODE_SIGNING_ALLOWED=NO
 
     - name: Create IPA
       run: |
