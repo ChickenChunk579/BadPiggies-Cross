@@ -205,7 +205,7 @@ add_executable  ( ${PROJECT_NAME}
                   ${SOURCES}
                 )
 
-include_directories ( ${EXT_HEADERS} )
+include_directories ( ${EXT_HEADERS} SDL/include SDL_ttf/include SDL_image/include )
 
 target_link_libraries ( ${PROJECT_NAME}
                         ${EXT_DEPS}
