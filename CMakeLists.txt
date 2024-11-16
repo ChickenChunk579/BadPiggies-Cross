@@ -123,9 +123,9 @@ if( NOM_BUILD_IOS )
 
   set ( EXT_DEPS
         ${EXT_DEPS}
-        "${PROJECT_SOURCE_DIR}/${EXTERNAL_DEPS_DIR}/ios/SDL2/libs/libSDL2.a"
-        "${PROJECT_SOURCE_DIR}/${EXTERNAL_DEPS_DIR}/ios/SDL2_image/libs/libSDL2_image.a"
-        "${PROJECT_SOURCE_DIR}/${EXTERNAL_DEPS_DIR}/ios/SDL2_ttf/libs/libSDL2_ttf.a"
+        "${PROJECT_SOURCE_DIR}/libs/SDL/Debug-iphoneos/libSDL2.a"
+        "${PROJECT_SOURCE_DIR}/libs/SDL/Debug-iphoneos/libSDL2_image.a"
+        "${PROJECT_SOURCE_DIR}/libs/SDL/Debug-iphoneos/libSDL2_ttf.a"
       )
 
   set ( EXT_HEADERS
