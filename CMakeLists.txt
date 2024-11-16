@@ -12,11 +12,12 @@ set ( CMAKE_TEMPLATE_PATH ${CMAKE_TEMPLATE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cm
 
 option( NOM_BUILD_IOS "Toggle building for the iOS platform" off )
 
-project( hello-sdl2-ios-cmake ) # $PROJECT_NAME
+project( BadPiggies ) # $PROJECT_NAME
 
 # Needs to be checked after project init
 if( CMAKE_SYSTEM_NAME STREQUAL "Darwin" )
   set( NOM_PLATFORM_OSX true )
+  set(NOM_BUILD_IOS true)
 
   # Setup the SDK selection for backwards compatibility
   if( NOM_BUILD_IOS )
@@ -103,7 +104,7 @@ set ( NOM_IOS_SIMULATOR_INSTALL_PATH
 set( MACOSX_BUNDLE_GUI_IDENTIFIER "net.i8degrees.${PROJECT_NAME}" )
 
 set ( SOURCES
-      src/main.mm
+      src/main.cpp
     )
 
 if( NOM_BUILD_IOS )
@@ -154,6 +155,16 @@ elseif( NOM_PLATFORM_OSX )
         "${PROJECT_SOURCE_DIR}/${EXTERNAL_DEPS_DIR}/osx/SDL2_ttf.framework/Headers"
       )
 
+else ()
+  add_subdirectory(SDL)
+  add_subdirectory(SDL_image)
+  add_subdirectory(SDL_ttf)
+  set (EXT_DEPS
+    ${EXT_DEPS}
+    SDL2::SDL2
+    SDL2_image::SDL2_image
+    SDL2_ttf::SDL2_ttf
+  )
 endif( NOM_BUILD_IOS )
 
 if( NOM_BUILD_IOS OR NOM_PLATFORM_OSX )

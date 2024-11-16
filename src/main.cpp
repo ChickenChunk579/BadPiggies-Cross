@@ -8,6 +8,10 @@
 #include <stdbool.h>
 #include <memory>
 
+#if defined(__APPLE__)
+#else
+#define SDL_MAIN_HANDLED
+#endif
 #include "SDL.h"
 
 #define USE_SDL2_IMAGE
@@ -27,6 +31,10 @@
   #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#define NO 0
+#define YES 1
+
+
 /// Pretty print C macros purely for convenience sake
 #define NOM_DUMP(var) \
   ( std::cout << #var << ": " << var << std::endl << std::endl )
@@ -45,8 +53,8 @@
 
 static bool gpause = false;
 
-static const int screen_width = 960;
-static const int screen_height = 640;
+static const int screen_width = 1334;
+static const int screen_height = 750;
 
 static SDL_Window *win = NULL;
 static SDL_Renderer *renderer = NULL;
@@ -56,7 +64,7 @@ static std::string bmp_file;
 
 const std::string resource_path( const std::string& identifier )
 {
-  char resources_path [ PATH_MAX ]; // file-system path
+  #if defined(__APPLE__)
   CFBundleRef bundle; // bundle type reference
 
   // Look for a bundle using its identifier if string passed is not null
@@ -89,7 +97,11 @@ const std::string resource_path( const std::string& identifier )
 
   CFRelease ( resourcesURL );
 
-  return resources_path;
+  #else
+
+  return "Resources";
+
+  #endif
 }
 
 void ApplySurface(int x, int y, SDL_Texture *tex, SDL_Renderer *rend, SDL_Rect *clip = NULL){
@@ -150,7 +162,7 @@ int main(int argc, char * argv[])
                               SDL_WINDOW_SHOWN | SDL_WINDOW_BORDERLESS
                             );
 
-  #elif defined( NOM_PLATFORM_OSX ) // Create a window that mimics iPhone 4s'
+  #else
                                     // native resolution.
     win = SDL_CreateWindow  ( "SDL2 OS X & iOS app",
                               SDL_WINDOWPOS_UNDEFINED,
@@ -236,7 +248,7 @@ int main(int argc, char * argv[])
   c_white.b = 255;
   c_white.a = 255;
 
-  SDL_Surface* ttf_surf = TTF_RenderText_Blended( ttf_font.get(), "boobies!", c_white );
+  SDL_Surface* ttf_surf = TTF_RenderText_Blended( ttf_font.get(), "hello sdl2!", c_white );
   ttf_tex = SDL_CreateTextureFromSurface(renderer, ttf_surf);
   SDL_FreeSurface(ttf_surf);
 
